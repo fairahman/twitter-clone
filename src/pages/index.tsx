@@ -1,9 +1,10 @@
+import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import { api } from "~/utils/api";
 
-export default function Home() {
+const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
 
   return (
@@ -52,9 +53,11 @@ export default function Home() {
       </main>
     </>
   );
-}
+};
 
-function AuthShowcase() {
+export default Home;
+
+const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();
 
   const { data: secretMessage } = api.example.getSecretMessage.useQuery(
@@ -76,4 +79,4 @@ function AuthShowcase() {
       </button>
     </div>
   );
-}
+};
